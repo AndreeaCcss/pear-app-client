@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import Peer from "simple-peer";
+import { withRouter } from "react-router";
 
 import ReactPlayer from "react-player";
 import io from "socket.io-client";
@@ -13,8 +14,6 @@ import io from "socket.io-client";
 class Chat extends React.Component {
   constructor() {
     super();
-    // this.auth = useAuth0();
-
     this.state = {
       videoSrc: null,
       playing: false,
@@ -23,18 +22,7 @@ class Chat extends React.Component {
       peer: null,
       auth: this.auth
     };
-    // const { loading, user, auth0 } = useAuth0();
   }
-
-  // if (this.state.auth || !user) {
-  // //   return <Loading />;
-  // }
-  // const getIdToken = async () => {
-  //   const id = await f.getIdTokenClaims();
-  //   console.log("user", id.__raw);
-  // };
-
-  // getIdToken();
 
   initPear = (type, stream) => {
     let peer = new Peer({
@@ -94,10 +82,6 @@ class Chat extends React.Component {
   };
 
   componentDidMount = () => {
-    // this.state.auth.loading && this.state.auth.user ? <Loading/>
-    // if (this.state.auth.Loading || !this.state.auth.user) {
-    //   return <Loading />;
-    // }
     let socket = io("http://localhost:4000");
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
@@ -107,6 +91,7 @@ class Chat extends React.Component {
           videoSrc: stream,
           playing: true
         });
+        socket.emit("joinedRoom", { id: this.props.match.params.id });
 
         socket.on("BackOffer", offer => {
           this.connectToPeer(offer, socket, stream);
@@ -158,4 +143,4 @@ class Chat extends React.Component {
   }
 }
 
-export default Chat;
+export default withRouter(Chat);
