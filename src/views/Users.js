@@ -11,8 +11,10 @@ class Users extends React.Component {
       <div>
         {this.props.users
           ? this.props.users.map(user => (
-              <div onClick={() => this.onClick(user.name.split(".").join(""))}>
-                <p>{user.name}</p>
+              <div onClick={() => this.onClick(user.id)}>
+                <p>
+                  {user.name} - {user.id}
+                </p>
                 <img className="user" src={user.picture} alt={user.picture} />
               </div>
             ))

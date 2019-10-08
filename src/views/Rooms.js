@@ -13,7 +13,8 @@ class Rooms extends React.Component {
 
   componentDidMount = () => {
     request
-      // .get("http://localhost:4000/users")
+      //.get("http://localhost:4000/users")
+      // .get("http://d65a323b.ngrok.io/users")
       .get("https://vast-beach-23446.herokuapp.com/users")
       .then(response => {
         return this.setState({
@@ -27,13 +28,16 @@ class Rooms extends React.Component {
     const user = this.props.user;
     request
       // .post("http://localhost:4000/users")
+      //.post("http://d65a323b.ngrok.io/users")
       .post("https://vast-beach-23446.herokuapp.com/users")
       .send({ name: user.nickname, picture: user.picture })
-      .then(res => console.log(res))
+      .then(res => {
+        this.props.history.push(`/chat/${res.body.id}`);
+      })
       .catch(console.error);
 
-    const pathParam = user.nickname.split(".").join("");
-    this.props.history.push(`/chat/${pathParam}`);
+    // const pathParam = user.id;
+    // this.props.history.push(`/chat/${pathParam}`);
   };
 
   render() {

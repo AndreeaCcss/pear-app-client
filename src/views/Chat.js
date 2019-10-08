@@ -19,17 +19,20 @@ class Chat extends React.Component {
       playing: false,
       peerVideoSrc: null,
       gotAnswer: false,
+      me: null,
       peer: null,
-      auth: this.auth
+      auth: this.auth,
+      socket: null
     };
   }
 
-  initPear = (type, stream) => {
+  initPeer = (type, stream) => {
     let peer = new Peer({
       initiator: type == "init" ? true : false,
       stream: stream,
       trickle: false
     });
+    console.log("type", type, "stream in initPeer", stream);
     const that = this;
     peer.on("stream", function(stream) {
       that.setState({
@@ -41,23 +44,28 @@ class Chat extends React.Component {
   };
 
   makePeer = (socket, stream) => {
-    let peer = this.initPear("init", stream);
+    let me = this.initPeer("init", stream);
     const gotAnswer = this.state.gotAnswer;
-    peer.on("signal", function(data) {
+    console.log("makePeer gotAnswer", gotAnswer);
+    me.on("signal", function(data) {
       if (!gotAnswer) {
         socket.emit("Offer", data);
       }
     });
+    console.log("setting me in state", me);
     this.setState({
-      peer: peer
+      me: me
     });
   };
 
   connectToPeer = (offer, socket, stream) => {
-    let peer = this.initPear("notInit", stream);
+    let peer = this.initPeer("notInit", stream);
+    console.log("connectToPear");
     peer.on("signal", data => {
       socket.emit("Answer", data);
+      console.log("connectToPear  emit Answer");
     });
+    console.log("connectToPeer", peer, "offer", offer);
     peer.signal(offer);
     this.setState({
       peer: peer
@@ -65,47 +73,87 @@ class Chat extends React.Component {
   };
 
   signalAnswer = answer => {
-    this.setState({
-      gotAnswer: true
-    });
-    let peer = this.state.peer;
-    peer.signal(answer);
+    if (this.state.me) {
+      this.setState({
+        gotAnswer: true
+      });
+      let peer = this.state.me;
+      console.log("signalAnswer", peer, "answer", answer);
+      peer.signal(answer);
+    } else {
+      console.log("Ignored signalAnswer");
+    }
   };
 
   removePeer = () => {
     if (this.state.peer) {
+      console.log("removePeer", this.state.peer);
       this.state.peer.destroy();
       this.setState({
-        peer: null
+        peer: null,
+        peerVideoSrc: null
       });
+    } else {
+      console.log("Ignored removePeer");
     }
+  };
+
+  removeMe = () => {
+    console.log("removeMe clickd =>", this.state.me);
+    if (this.state.me) {
+      console.log("removeMe", this.state.me);
+      // this.state.me.destroy();
+      // this.state.peer.destroy();
+      this.state.socket.emit("Disconnect");
+    }
+
+    this.state.videoSrc.getTracks().forEach(track => track.stop());
+    this.setState({
+      me: null,
+      videoSrc: null
+    });
+    this.props.history.push("/join-chat");
   };
 
   componentDidMount = () => {
     // let socket = io("http://localhost:4000");
+    //let socket = io("http://d65a323b.ngrok.io");
     let socket = io("https://vast-beach-23446.herokuapp.com");
+    const roomId = this.props.match.params.id;
+
+    socket.room = roomId;
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then(stream => {
-        socket.emit("NewClient");
+        socket.emit("NewClient", { roomId });
+
         this.setState({
           videoSrc: stream,
-          playing: true
+          playing: true,
+          socket
         });
-        socket.emit("joinedRoom", { id: this.props.match.params.id });
+        // socket.emit("joinedRoom", { id: this.props.match.params.id });
 
+        // socket.on("joinedRoom", ()  => {
+
+        // })
         socket.on("BackOffer", offer => {
           this.connectToPeer(offer, socket, stream);
         });
         socket.on("BackAnswer", answer => {
           this.signalAnswer(answer);
         });
-        socket.on("CreatePeer", () => this.makePeer(socket, stream));
+
+        socket.on("CreatePeer", () => {
+          console.log("received CreatePeer");
+          this.makePeer(socket, stream);
+        });
         socket.on("Disconnect", () => this.removePeer());
       })
       .catch(err => document.write(err));
   };
 
+  onClick = () => {};
   render() {
     return (
       <Container className="mb-5">
@@ -119,6 +167,7 @@ class Chat extends React.Component {
                 <ReactPlayer
                   url={this.state.videoSrc}
                   playing={this.state.playing}
+                  volume={0}
                 />
               </div>
             </div>
@@ -128,14 +177,17 @@ class Chat extends React.Component {
                 className="embed-responsive embed-responsive-16by9"
               >
                 <div className="centered" id="muteText">
-                  <ReactPlayer
-                    url={this.state.peerVideoSrc}
-                    playing={this.state.playing}
-                    className="embed-responsive-item"
-                    id="peerVideo"
-                  />
+                  {this.state.peerVideoSrc && (
+                    <ReactPlayer
+                      url={this.state.peerVideoSrc}
+                      playing={this.state.peerVideoSrc !== null}
+                      className="embed-responsive-item"
+                      id="peerVideo"
+                    />
+                  )}
                 </div>
               </div>
+              <button onClick={this.removeMe}>leave call</button>
             </div>
           </div>
         </div>

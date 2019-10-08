@@ -13,7 +13,12 @@ const onRedirectCallback = appState => {
       : window.location.pathname
   );
 };
-
+console.log(
+  "x",
+  process.env.REACT_APP_AUTH_DOMAIN,
+  "y",
+  process.env.REACT_APP_CLIENT_ID
+);
 ReactDOM.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH_DOMAIN}
