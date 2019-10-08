@@ -82,7 +82,8 @@ class Chat extends React.Component {
   };
 
   componentDidMount = () => {
-    let socket = io("http://localhost:4000");
+    // let socket = io("http://localhost:4000");
+    let socket = io("https://vast-beach-23446.herokuapp.com");
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then(stream => {
