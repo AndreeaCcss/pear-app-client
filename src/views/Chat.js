@@ -8,13 +8,26 @@ import io from "socket.io-client";
 // import Highlight from "../components/Highlight";
 // import Loading from "../components/Loading";
 // import { useAuth0 } from "../react-auth0-spa";
+// import Loading from "../components/Loading";
 
 class Chat extends React.Component {
-  // const { loading, user, auth0 } = useAuth0();
-  // const f = useAuth0();
+  constructor() {
+    super();
+    // this.auth = useAuth0();
 
-  // if (loading || !user) {
-  //   return <Loading />;
+    this.state = {
+      videoSrc: null,
+      playing: false,
+      peerVideoSrc: null,
+      gotAnswer: false,
+      peer: null,
+      auth: this.auth
+    };
+    // const { loading, user, auth0 } = useAuth0();
+  }
+
+  // if (this.state.auth || !user) {
+  // //   return <Loading />;
   // }
   // const getIdToken = async () => {
   //   const id = await f.getIdTokenClaims();
@@ -22,14 +35,6 @@ class Chat extends React.Component {
   // };
 
   // getIdToken();
-
-  state = {
-    videoSrc: null,
-    playing: false,
-    peerVideoSrc: null,
-    gotAnswer: false,
-    peer: null
-  };
 
   initPear = (type, stream) => {
     let peer = new Peer({
@@ -89,6 +94,10 @@ class Chat extends React.Component {
   };
 
   componentDidMount = () => {
+    // this.state.auth.loading && this.state.auth.user ? <Loading/>
+    // if (this.state.auth.Loading || !this.state.auth.user) {
+    //   return <Loading />;
+    // }
     let socket = io("http://localhost:4000");
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })

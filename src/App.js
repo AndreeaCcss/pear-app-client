@@ -16,7 +16,7 @@ import "./App.css";
 
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
-import Chat from "./views/Chat";
+import ChatContainer from "./views/ChatContainer";
 initFontAwesome();
 
 const App = () => {
@@ -34,7 +34,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Home} />
             <PrivateRoute path="/profile" component={Profile} />
-            <Route path="/chat" component={Chat} />
+            <PrivateRoute path="/chat" component={ChatContainer} />
           </Switch>
         </Container>
         <Footer />
