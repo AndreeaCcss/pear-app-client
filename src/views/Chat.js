@@ -89,7 +89,7 @@ class Chat extends React.Component {
   };
 
   componentDidMount = () => {
-    let socket = io("http://localhost:3040");
+    let socket = io("http://localhost:4000");
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then(stream => {
