@@ -1,20 +1,22 @@
 import React from "react";
-import Loading from "../components/Loading";
-import { useAuth0 } from "../react-auth0-spa";
-import Chat from "./Chat";
+import { Container, Row, Col } from "reactstrap";
+import Peer from "simple-peer";
+import io from "socket.io-client";
+import Rooms from "./Rooms";
 
-const ChatContainer = () => {
+import { useAuth0 } from "../react-auth0-spa";
+
+const RoomsContainer = () => {
   const { loading, user, auth0 } = useAuth0();
   const f = useAuth0();
-  if (loading || !user) {
-    return <Loading />;
-  }
+
   const getIdToken = async () => {
     const id = await f.getIdTokenClaims();
     console.log("user", id.__raw);
   };
 
   getIdToken();
-  return <Chat user={user} loading={loading} />;
+  return <Rooms user={user} />;
 };
-export default ChatContainer;
+
+export default RoomsContainer;

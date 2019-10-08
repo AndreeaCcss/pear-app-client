@@ -24,7 +24,8 @@
     "reactstrap": "^8.0.0",
     "simple-peer": "^9.6.0",
     "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.0"
+    "socket.io-client": "^2.3.0",
+    "superagent": "^5.1.0"
   },
   "devDependencies": {},
   "eslintConfig": {
