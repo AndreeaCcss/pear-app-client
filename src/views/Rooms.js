@@ -14,7 +14,7 @@ class Rooms extends React.Component {
   componentDidMount = () => {
     request
       // .get("http://localhost:4000/users")
-      .get("https://vast-beach-23446.herokuapp.com")
+      .get("https://vast-beach-23446.herokuapp.com/users")
       .then(response => {
         return this.setState({
           users: response.body
@@ -27,7 +27,7 @@ class Rooms extends React.Component {
     const user = this.props.user;
     request
       // .post("http://localhost:4000/users")
-      .post("https://vast-beach-23446.herokuapp.com")
+      .post("https://vast-beach-23446.herokuapp.com/users")
       .send({ name: user.nickname, picture: user.picture })
       .then(res => console.log(res))
       .catch(console.error);
