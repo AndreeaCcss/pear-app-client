@@ -95,7 +95,6 @@ class Chat extends React.Component {
   };
 
   removeMe = () => {
-    console.log("removeMe clickd =>", this.state.me);
     if (this.state.me) {
       console.log("removeMe", this.state.me);
       this.state.socket.emit("Disconnect");
@@ -161,8 +160,8 @@ class Chat extends React.Component {
                   playing={this.state.playing}
                   volume={0}
                   className="my-video"
-                  width="320"
-                  height="240"
+                  width="520"
+                  height="440"
                 />
               </div>
             </div>

@@ -1,9 +1,16 @@
 import React from "react";
 import { withRouter } from "react-router";
+import request from "superagent";
+import url from "../constants";
 
 class Users extends React.Component {
-  onClick = pathParam => {
-    this.props.history.push(`/chat/${pathParam}`);
+  onClick = userId => {
+    request
+      .delete(`${url}/users/${userId}`)
+      .then(res => console.log(res))
+      .catch(console.error);
+
+    this.props.history.push(`/chat/${userId}`);
   };
 
   render() {
