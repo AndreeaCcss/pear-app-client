@@ -1,15 +1,10 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
 import Peer from "simple-peer";
 import { withRouter } from "react-router";
 
 import ReactPlayer from "react-player";
 import io from "socket.io-client";
-
-// import Highlight from "../components/Highlight";
-// import Loading from "../components/Loading";
-// import { useAuth0 } from "../react-auth0-spa";
-// import Loading from "../components/Loading";
 
 class Chat extends React.Component {
   constructor() {
