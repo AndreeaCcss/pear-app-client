@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { Link } from "react-router-dom";
 import {
   Collapse,
   Container,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -17,8 +16,9 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
-
 import { useAuth0 } from "../react-auth0-spa";
+
+import logo from "../assets/Pear_logo.png";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,27 +34,19 @@ const NavBar = () => {
     <div className="nav-container">
       <Navbar color="light" light expand="md">
         <Container>
-          <NavbarBrand className="logo" />
+          <Link to="/">
+            <img src={logo} className="logo-pear" alt={"Logo"}></img>
+          </Link>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink
-                  tag={RouterNavLink}
-                  to="/"
-                  exact
-                  activeClassName="router-link-exact-active"
-                >
-                  Home
-                </NavLink>
-              </NavItem>
               {user && (
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}
                     to="/join-chat"
                     exact
-                    activeClassName="router-link-exact-active"
+                    id="nav-link"
                   >
                     Join chat
                   </NavLink>
