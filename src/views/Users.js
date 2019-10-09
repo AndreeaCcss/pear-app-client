@@ -9,16 +9,25 @@ class Users extends React.Component {
   render() {
     return (
       <div>
-        {this.props.users
-          ? this.props.users.map(user => (
-              <div onClick={() => this.onClick(user.id)}>
-                <p>
-                  {user.name} - {user.id}
-                </p>
-                <img className="user" src={user.picture} alt={user.picture} />
-              </div>
-            ))
-          : null}
+        <h1 className="join-room">Join existing room</h1>
+        <div className="rooms">
+          {this.props.users
+            ? this.props.users.map(user => (
+                <div className="user-div" onClick={() => this.onClick(user.id)}>
+                  <div className="div-user-picture">
+                    <img
+                      className="user-picture"
+                      src={user.picture}
+                      alt={user.picture}
+                    />
+                  </div>
+                  <div className="div-user-name">
+                    <p className="user-name">{user.name}</p>
+                  </div>
+                </div>
+              ))
+            : null}
+        </div>
       </div>
     );
   }

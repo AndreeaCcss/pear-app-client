@@ -29,7 +29,120 @@
   left: 0;
   right: 0;
 }
-.user {
+
+.user-picture {
   height: 150px;
   width: 150px;
+  border-radius: 50%;
+}
+
+.user-div {
+  display: grid;
+  grid-template-columns: 1fr;
+  cursor: pointer;
+  margin: 1em;
+}
+
+.logo-pear {
+  height: 50px;
+  width: 50px;
+}
+
+#qsLoginBtn {
+  background-color: #f8f9fb;
+  border-bottom: 1px solid #f39d22;
+  color: #f39d22;
+  font-size: 2.5em;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+}
+
+#nav-link {
+  color: #f39d22;
+  font-size: 2.5em;
+  background-color: #f8f9fb;
+  color: #f39d22;
+  font-size: 2.5em;
+}
+
+.rooms {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.join-room {
+  color: #f39d22;
+  text-align: center;
+  margin: 2em;
+}
+
+.create-room-btn {
+  background-color: white;
+  border-bottom: 5px solid #f39d22;
+  height: 2.5em;
+  width: 9em;
+  color: #f39d22;
+  margin: 0 auto;
+  font-size: 6em;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.create-btn-div {
+  text-align: center;
+}
+
+.user-name {
+  color: #f39d22;
+  margin-top: 1em;
+  font-size: 18px;
+}
+
+.div-user-name {
+  text-align: center;
+}
+
+.div-user-picture {
+  text-align: center;
+}
+
+.pear-logo-pear {
+  width: 15em;
+}
+
+.app-description {
+  text-align: center;
+  color: #f39d22;
+}
+
+#leave-call-btn {
+  background-color: white;
+  border-bottom: 5px solid #f39d22;
+  height: 2.5em;
+  width: 6em;
+  color: #f39d22;
+  margin: 0 auto;
+  font-size: 2em;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.my-video-div {
+  width: 200px;
+  height: 200px;
+  margin-top: 1em;
+}
+
+.peer-video-div {
+  width: 600px;
+  height: 600px;
+  margin-top: 1em;
+}
+
+.videos-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

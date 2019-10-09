@@ -2,9 +2,10 @@ import React from "react";
 import { Container } from "reactstrap";
 import Peer from "simple-peer";
 import { withRouter } from "react-router";
-
 import ReactPlayer from "react-player";
 import io from "socket.io-client";
+
+import url from "../constants";
 
 class Chat extends React.Component {
   constructor() {
@@ -97,8 +98,6 @@ class Chat extends React.Component {
     console.log("removeMe clickd =>", this.state.me);
     if (this.state.me) {
       console.log("removeMe", this.state.me);
-      // this.state.me.destroy();
-      // this.state.peer.destroy();
       this.state.socket.emit("Disconnect");
     }
 
@@ -111,9 +110,7 @@ class Chat extends React.Component {
   };
 
   componentDidMount = () => {
-    // let socket = io("http://localhost:4000");
-    //let socket = io("http://d65a323b.ngrok.io");
-    let socket = io("https://vast-beach-23446.herokuapp.com");
+    let socket = io(url);
     const roomId = this.props.match.params.id;
 
     socket.room = roomId;
@@ -127,11 +124,7 @@ class Chat extends React.Component {
           playing: true,
           socket
         });
-        // socket.emit("joinedRoom", { id: this.props.match.params.id });
 
-        // socket.on("joinedRoom", ()  => {
-
-        // })
         socket.on("BackOffer", offer => {
           this.connectToPeer(offer, socket, stream);
         });
@@ -151,38 +144,43 @@ class Chat extends React.Component {
   onClick = () => {};
   render() {
     return (
-      <Container className="mb-5">
-        <div className="container-fluid">
+      <Container>
+        <div>
           <div className="row h-10 w-100">
-            <div className="col"></div>
+            <div className="col">
+              <button onClick={this.removeMe} id="leave-call-btn">
+                Leave call
+              </button>
+            </div>
           </div>
-          <div className="row h-90 w-100">
-            <div className="col-12 col-sm-6 d-flex justify-content-center">
-              <div className="embed-responsive embed-responsive-16by9">
+          <div className="videos-container">
+            <div>
+              <div className="my-video-div">
                 <ReactPlayer
                   url={this.state.videoSrc}
                   playing={this.state.playing}
                   volume={0}
+                  className="my-video"
+                  width="320"
+                  height="240"
                 />
               </div>
             </div>
-            <div className="col-12 col-sm-6 d-flex justify-content-center">
-              <div
-                id="peerDiv"
-                className="embed-responsive embed-responsive-16by9"
-              >
-                <div className="centered" id="muteText">
+            <div className="peer-video-div">
+              <div id="peerDiv">
+                <div id="muteText">
                   {this.state.peerVideoSrc && (
                     <ReactPlayer
                       url={this.state.peerVideoSrc}
                       playing={this.state.peerVideoSrc !== null}
-                      className="embed-responsive-item"
+                      className="peer-video"
                       id="peerVideo"
+                      width="520"
+                      height="440"
                     />
                   )}
                 </div>
               </div>
-              <button onClick={this.removeMe}>leave call</button>
             </div>
           </div>
         </div>

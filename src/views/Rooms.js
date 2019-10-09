@@ -1,10 +1,9 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
-import Peer from "simple-peer";
-import io from "socket.io-client";
 import { withRouter } from "react-router";
-import Users from "./Users";
 import request from "superagent";
+
+import Users from "./Users";
+import url from "../constants";
 
 class Rooms extends React.Component {
   state = {
@@ -13,9 +12,7 @@ class Rooms extends React.Component {
 
   componentDidMount = () => {
     request
-      //.get("http://localhost:4000/users")
-      // .get("http://d65a323b.ngrok.io/users")
-      .get("https://vast-beach-23446.herokuapp.com/users")
+      .get(`${url}/users`)
       .then(response => {
         return this.setState({
           users: response.body
@@ -27,23 +24,22 @@ class Rooms extends React.Component {
   onClick = () => {
     const user = this.props.user;
     request
-      // .post("http://localhost:4000/users")
-      //.post("http://d65a323b.ngrok.io/users")
-      .post("https://vast-beach-23446.herokuapp.com/users")
+      .post(`${url}/users`)
       .send({ name: user.nickname, picture: user.picture })
       .then(res => {
         this.props.history.push(`/chat/${res.body.id}`);
       })
       .catch(console.error);
-
-    // const pathParam = user.id;
-    // this.props.history.push(`/chat/${pathParam}`);
   };
 
   render() {
     return (
-      <div>
-        <button onClick={this.onClick}>Join room</button>
+      <div className="create-room-div">
+        <div className="create-btn-div">
+          <button className="create-room-btn" onClick={this.onClick}>
+            Create your room
+          </button>
+        </div>
         <Users users={this.state.users} />
       </div>
     );

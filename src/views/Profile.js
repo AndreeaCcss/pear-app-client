@@ -6,7 +6,7 @@ import Loading from "../components/Loading";
 import { useAuth0 } from "../react-auth0-spa";
 
 const Profile = () => {
-  const { loading, user, auth0 } = useAuth0();
+  const { loading, user } = useAuth0();
   const f = useAuth0();
 
   if (loading || !user) {
@@ -14,7 +14,7 @@ const Profile = () => {
   }
   const getIdToken = async () => {
     const id = await f.getIdTokenClaims();
-    console.log("user", id.__raw);
+    return id;
   };
 
   getIdToken();

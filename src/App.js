@@ -2,22 +2,19 @@ import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { Container } from "reactstrap";
 
+import initFontAwesome from "./utils/initFontAwesome";
+import ChatContainer from "./views/ChatContainer";
+import RoomsContainer from "./views/RoomsContainer";
+
 import PrivateRoute from "./components/PrivateRoute";
 import Loading from "./components/Loading";
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
 import { useAuth0 } from "./react-auth0-spa";
 import history from "./utils/history";
-
-// styles
 import "./App.css";
 
-// fontawesome
-import initFontAwesome from "./utils/initFontAwesome";
-import ChatContainer from "./views/ChatContainer";
-import RoomsContainer from "./views/RoomsContainer";
 initFontAwesome();
 
 const App = () => {
@@ -39,7 +36,6 @@ const App = () => {
             <PrivateRoute path="/join-chat" component={RoomsContainer} />
           </Switch>
         </Container>
-        <Footer />
       </div>
     </Router>
   );
