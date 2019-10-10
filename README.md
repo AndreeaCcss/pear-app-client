@@ -31,3 +31,7 @@ https://pear-app-459.herokuapp.com
 ## What is Auth0?
 
 Auth0 helps you to add authentication with multiple authentication sources , either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, among others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
+
+#### Special thanks to @Vinnu1 for the youtube tutorial:
+
+https://www.youtube.com/watch?v=KLCcCTFivhM&t=560s
