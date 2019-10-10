@@ -1,6 +1,6 @@
 # Pear app
 
-### A client that enables video calling using React, socket.io-client, simple-peer and secure authentication with Auth0
+**A client that enables video calling using React, socket.io-client, simple-peer and secure authentication with Auth0**
 
 ## Project setup
 
