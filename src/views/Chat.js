@@ -59,7 +59,7 @@ class Chat extends React.Component {
     console.log("connectToPear");
     peer.on("signal", data => {
       socket.emit("Answer", data);
-      console.log("connectToPear  emit Answer");
+      console.log("connectToPear  emit Answer", data);
     });
     console.log("connectToPeer", peer, "offer", offer);
     peer.signal(offer);
@@ -117,6 +117,7 @@ class Chat extends React.Component {
       .getUserMedia({ video: true, audio: true })
       .then(stream => {
         socket.emit("NewClient", { roomId });
+        console.log("emitted  new client", stream);
 
         this.setState({
           videoSrc: stream,
@@ -124,18 +125,25 @@ class Chat extends React.Component {
           socket
         });
 
-        socket.on("BackOffer", offer => {
-          this.connectToPeer(offer, socket, stream);
-        });
-        socket.on("BackAnswer", answer => {
-          this.signalAnswer(answer);
-        });
-
         socket.on("CreatePeer", () => {
           console.log("received CreatePeer");
           this.makePeer(socket, stream);
         });
-        socket.on("Disconnect", () => this.removePeer());
+
+        socket.on("BackOffer", offer => {
+          console.log("revcived back offer", offer);
+
+          this.connectToPeer(offer, socket, stream);
+        });
+        socket.on("BackAnswer", answer => {
+          console.log("revcived back answer", answer);
+          this.signalAnswer(answer);
+        });
+
+        socket.on("Disconnect", () => {
+          console.log("received disconnect on");
+          this.removePeer();
+        });
       })
       .catch(err => document.write(err));
   };
