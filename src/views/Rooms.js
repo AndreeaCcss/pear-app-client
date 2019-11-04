@@ -36,7 +36,11 @@ class Rooms extends React.Component {
     return (
       <div className="create-room-div">
         <div className="create-btn-div">
-          <button className="create-room-btn" onClick={this.onClick}>
+          <button
+            data-testid="button"
+            className="create-room-btn"
+            onClick={this.onClick}
+          >
             Create your room
           </button>
         </div>

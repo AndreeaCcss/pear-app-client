@@ -19,7 +19,7 @@ initFontAwesome();
 
 const App = () => {
   const { loading } = useAuth0();
-
+  console.log(loading);
   if (loading) {
     return <Loading />;
   }
