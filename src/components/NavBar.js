@@ -56,12 +56,7 @@ const NavBar = () => {
             <Nav className="d-none d-md-block" navbar>
               {!isAuthenticated && (
                 <NavItem>
-                  <NavLink
-                    tag={RouterNavLink}
-                    to="/join-chat"
-                    exact
-                    id="nav-link"
-                  >
+                  <NavLink tag={RouterNavLink} to="/join-chat" exact>
                     <Button
                       id="qsLoginBtn"
                       color="primary"
