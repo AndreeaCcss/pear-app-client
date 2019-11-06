@@ -56,14 +56,16 @@ const NavBar = () => {
             <Nav className="d-none d-md-block" navbar>
               {!isAuthenticated && (
                 <NavItem>
-                  <Button
-                    id="qsLoginBtn"
-                    color="primary"
-                    className="btn-margin"
-                    onClick={() => loginWithRedirect({})}
-                  >
-                    Log in
-                  </Button>
+                  <NavLink tag={RouterNavLink} to="/join-chat" exact>
+                    <Button
+                      id="qsLoginBtn"
+                      color="primary"
+                      className="btn-margin"
+                      onClick={() => loginWithRedirect({})}
+                    >
+                      Log in
+                    </Button>
+                  </NavLink>
                 </NavItem>
               )}
               {isAuthenticated && (
