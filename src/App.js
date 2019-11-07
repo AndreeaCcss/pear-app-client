@@ -28,14 +28,14 @@ const App = () => {
     <Router history={history}>
       <div id="app" className="d-flex flex-column h-100">
         <NavBar />
-        <Container className="flex-grow-1 mt-5">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <PrivateRoute path="/profile" component={Profile} />
-            <Route path="/chat/:id" component={ChatContainer} />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <PrivateRoute path="/profile" component={Profile} />
+          <Route path="/chat/:id" component={ChatContainer} />
+          <Container className="flex-grow-1 mt-5">
             <PrivateRoute path="/join-chat" component={RoomsContainer} />
-          </Switch>
-        </Container>
+          </Container>
+        </Switch>
       </div>
     </Router>
   );
