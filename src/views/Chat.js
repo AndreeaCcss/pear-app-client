@@ -151,47 +151,44 @@ class Chat extends React.Component {
   onClick = () => {};
   render() {
     return (
-      <Container>
-        <div>
-          <div className="row h-10 w-100">
-            <div className="col">
-              <button onClick={this.removeMe} id="leave-call-btn">
-                Leave call
-              </button>
+      // <Container>
+      <div>
+        <div className="leave-call">
+          <button onClick={this.removeMe} id="leave-call-btn">
+            Leave call
+          </button>
+        </div>
+        <div className="videos-container">
+          <div>
+            <div className="my-video-div">
+              <ReactPlayer
+                url={this.state.videoSrc}
+                playing={this.state.playing}
+                volume={0}
+                className="react-player"
+                width="100%"
+                height="100%"
+              />
             </div>
           </div>
-          <div className="videos-container">
-            <div>
-              <div className="my-video-div">
+
+          <div className="peer-video-div">
+            <div id="muteText">
+              {this.state.peerVideoSrc && (
                 <ReactPlayer
-                  url={this.state.videoSrc}
-                  playing={this.state.playing}
-                  volume={0}
-                  className="my-video"
-                  width="520"
-                  height="440"
+                  url={this.state.peerVideoSrc}
+                  playing={this.state.peerVideoSrc !== null}
+                  className="react-player"
+                  // id="peerVideo"
+                  width="100%"
+                  height="100%"
                 />
-              </div>
-            </div>
-            <div className="peer-video-div">
-              <div id="peerDiv">
-                <div id="muteText">
-                  {this.state.peerVideoSrc && (
-                    <ReactPlayer
-                      url={this.state.peerVideoSrc}
-                      playing={this.state.peerVideoSrc !== null}
-                      className="peer-video"
-                      id="peerVideo"
-                      width="520"
-                      height="440"
-                    />
-                  )}
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
-      </Container>
+      </div>
+      // </Container>
     );
   }
 }

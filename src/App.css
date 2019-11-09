@@ -31,11 +31,15 @@
 }
 
 .user-picture {
-  height: 150px;
-  width: 150px;
+  height: 60%;
+  width: 60%;
   border-radius: 50%;
 }
 
+.users-divs {
+  /* display: grid; */
+  /* grid-template-columns: 1fr; */
+}
 .user-div {
   display: grid;
   grid-template-columns: 1fr;
@@ -80,8 +84,8 @@
 .create-room-btn {
   background-color: white;
   border-bottom: 5px solid #f39d22;
-  height: 2.5em;
-  width: 9em;
+  height: 15%;
+  width: 80%;
   color: #f39d22;
   margin: 0 auto;
   font-size: 6em;
@@ -117,11 +121,14 @@
   color: #f39d22;
 }
 
+.leave-call {
+  display: grid;
+}
+
 #leave-call-btn {
   background-color: white;
   border-bottom: 5px solid #f39d22;
   height: 2.5em;
-  width: 6em;
   color: #f39d22;
   margin: 0 auto;
   font-size: 2em;
@@ -131,18 +138,73 @@
 }
 
 .my-video-div {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 15%;
+  position: relative;
+  /* padding-top: 56.25%; */
 }
 
+/* .react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
+
 .peer-video-div {
-  width: 500px;
-  height: 500px;
   margin-top: 1em;
+  margin-bottom: 1em;
+  position: relative;
+  /* padding-top: 56.25%; */
+  padding-right: 15%;
 }
 
 .videos-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: 680px) {
+  .videos-container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .my-video-div {
+    width: 100%;
+    height: 100%;
+    margin-top: 1em;
+    padding-left: 5%;
+    padding-right: 5%;
+    position: relative;
+  }
+
+  .peer-video-div {
+    margin-bottom: 1em;
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  .create-room-btn {
+    font-size: 2em;
+  }
+
+  .h1,
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .rooms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .rooms {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
