@@ -15,7 +15,7 @@ class Users extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="users-divs">
         <h1 className="join-room">Join existing room</h1>
         <div className="rooms">
           {this.props.users

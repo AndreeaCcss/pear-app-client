@@ -171,20 +171,19 @@ class Chat extends React.Component {
               />
             </div>
           </div>
+
           <div className="peer-video-div">
-            <div id="peerDiv">
-              <div id="muteText">
-                {this.state.peerVideoSrc && (
-                  <ReactPlayer
-                    url={this.state.peerVideoSrc}
-                    playing={this.state.peerVideoSrc !== null}
-                    className="react-player"
-                    // id="peerVideo"
-                    width="100%"
-                    height="100%"
-                  />
-                )}
-              </div>
+            <div id="muteText">
+              {this.state.peerVideoSrc && (
+                <ReactPlayer
+                  url={this.state.peerVideoSrc}
+                  playing={this.state.peerVideoSrc !== null}
+                  className="react-player"
+                  // id="peerVideo"
+                  width="100%"
+                  height="100%"
+                />
+              )}
             </div>
           </div>
         </div>
